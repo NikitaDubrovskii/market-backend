@@ -1,10 +1,13 @@
 package dev.dubrovsky.marketbackend.controllers;
 
+import dev.dubrovsky.marketbackend.dto.GameNewDTO;
+import dev.dubrovsky.marketbackend.dto.GameOfTheDayDTO;
+import dev.dubrovsky.marketbackend.dto.GamePopularDTO;
+import dev.dubrovsky.marketbackend.dto.GameSaleDTO;
 import dev.dubrovsky.marketbackend.models.Game;
 import dev.dubrovsky.marketbackend.services.GameService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,19 +21,45 @@ public class GameController {
         this.gameService = gameService;
     }
 
-    @GetMapping()
-    public List<Game> getAll() {
-        return gameService.getAll();
-    }
-
     @GetMapping("/{id}")
     public Game getById(@PathVariable("id") Long id) {
         return gameService.getById(id);
     }
 
+    @GetMapping("/popularGame")
+    public List<GamePopularDTO> getPopularGame() {
+        return gameService.getPopularGame();
+    }
+
+    @GetMapping("/gameOfTheDay")
+    public GameOfTheDayDTO getGameOfTheDay() {
+        return gameService.getGameOfTheDay();
+    }
+
+    @GetMapping("/newGame")
+    public List<GameNewDTO> getNewGame() {
+        return gameService.getNewGame();
+    }
+
+    @GetMapping("/saleGame")
+    public List<GameSaleDTO> getSaleGame() {
+        return gameService.getSaleGame();
+    }
+
     @PostMapping("/add")
-    public Game add (@RequestBody Game game) {
-        return gameService.add(game);
+    public Game add (@ModelAttribute Game game,
+                     @RequestParam("image") MultipartFile... files) {
+        return gameService.add(game, files);
+    }
+
+    @PutMapping("/addGameOfTheDay/{id}")
+    public Game addGameOfTheDay(@PathVariable("id") Long id, @RequestParam("discount") Integer discount) {
+        return gameService.addGameOfTheDay(id, discount);
+    }
+
+    @PutMapping("/addGameSale")
+    public List<Game> addGameSale(@RequestParam("discount") Integer discount, @RequestParam("id") Long... gameIds) {
+        return gameService.addGameSale(discount, gameIds);
     }
 
     @PutMapping("/update/{id}")
@@ -41,6 +70,11 @@ public class GameController {
     @DeleteMapping("/delete/{id}")
     public Game delete(@PathVariable("id") Long id) {
         return gameService.delete(id);
+    }
+
+    @PutMapping("/removeSaleGame")
+    public void removeSaleGame(@RequestParam("id") Long... gameIds) {
+        gameService.removeGameSale(gameIds);
     }
 
     @PutMapping("/{idGame}/assign")

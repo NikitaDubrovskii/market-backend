@@ -2,11 +2,11 @@ package dev.dubrovsky.marketbackend.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,11 +15,6 @@ import java.util.Set;
 @Table(name = "games")
 @Setter
 @Getter
-/*@ToString(
-        of = {"gameId", "name", "description", "price",
-        "currency", "quantity", "categories", "image",
-        "rating", "dateAdded", "brand"}
-)*/
 public class Game {
 
     @Id
@@ -54,15 +49,28 @@ public class Game {
     @JsonIgnoreProperties("games")
     private Set<Category> categories = new HashSet<>();
 
-    @Column(name = "image")         //сделать как то фотографии
-    private String image;
-
     @Column(name = "rating")
     private Float rating;
 
     @Column(name = "date_added")
-    private Date dateAdded;
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    private LocalDate dateAdded;
 
     @Column(name = "brand")
     private String brand;
+
+    @OneToMany(mappedBy = "gameId", fetch = FetchType.LAZY)
+    private Set<Image> images;
+
+    @Column(name = "game_of_the_day")
+    private boolean gameOfTheDay;
+
+    @Column(name = "sale")
+    private boolean sale;
+
+    @Column(name = "discount")
+    private Integer discount;
+
+    @Column(name = "price_with_discount")
+    private BigDecimal priceWithDiscount;
 }
