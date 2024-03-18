@@ -34,8 +34,8 @@ public class Game {
     @Column(name = "currency")
     private String currency;
 
-    @Column(name = "quantity")
-    private Integer quantity;
+    @OneToMany(mappedBy = "gameId")
+    private Set<ShopGame> shopGames;
 
     @ManyToMany(
             fetch = FetchType.LAZY,

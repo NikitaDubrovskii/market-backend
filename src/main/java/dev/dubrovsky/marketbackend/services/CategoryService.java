@@ -4,6 +4,7 @@ import dev.dubrovsky.marketbackend.models.Category;
 import dev.dubrovsky.marketbackend.models.Game;
 import dev.dubrovsky.marketbackend.repositories.CategoryRepository;
 import dev.dubrovsky.marketbackend.repositories.GameRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,14 +15,11 @@ import java.util.Set;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class CategoryService {
+
     private final CategoryRepository categoryRepository;
     private final GameRepository gameRepository;
-
-    public CategoryService(CategoryRepository categoryRepository, GameRepository gameRepository) {
-        this.categoryRepository = categoryRepository;
-        this.gameRepository = gameRepository;
-    }
 
     public Category getById(Long id) {
         return categoryRepository.findById(id).orElse(null);

@@ -11,6 +11,7 @@ import dev.dubrovsky.marketbackend.models.Image;
 import dev.dubrovsky.marketbackend.repositories.CategoryRepository;
 import dev.dubrovsky.marketbackend.repositories.GameRepository;
 import dev.dubrovsky.marketbackend.repositories.ImageRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,20 +28,13 @@ import java.util.Objects;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class GameService {
+
     private final GameRepository gameRepository;
     private final CategoryRepository categoryRepository;
     private final ImageRepository imageRepository;
     private final GameFacade gameFacade;
-
-    public GameService(GameRepository gameRepository,
-                       CategoryRepository categoryRepository,
-                       ImageRepository imageRepository, GameFacade gameFacade) {
-        this.gameRepository = gameRepository;
-        this.categoryRepository = categoryRepository;
-        this.imageRepository = imageRepository;
-        this.gameFacade = gameFacade;
-    }
 
     public Game getById(Long id) {
         return gameRepository.findById(id).orElse(null);
