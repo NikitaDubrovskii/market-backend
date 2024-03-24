@@ -1,6 +1,6 @@
 package dev.dubrovsky.marketbackend.dto;
 
-import dev.dubrovsky.marketbackend.models.Image;
+import dev.dubrovsky.marketbackend.model.Image;
 import lombok.Getter;
 import lombok.Setter;
 

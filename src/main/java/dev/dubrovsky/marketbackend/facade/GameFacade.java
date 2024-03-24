@@ -4,8 +4,8 @@ import dev.dubrovsky.marketbackend.dto.GameNewDTO;
 import dev.dubrovsky.marketbackend.dto.GameOfTheDayDTO;
 import dev.dubrovsky.marketbackend.dto.GamePopularDTO;
 import dev.dubrovsky.marketbackend.dto.GameSaleDTO;
-import dev.dubrovsky.marketbackend.models.Game;
-import dev.dubrovsky.marketbackend.models.Image;
+import dev.dubrovsky.marketbackend.model.Game;
+import dev.dubrovsky.marketbackend.model.Image;
 import org.springframework.stereotype.Component;
 
 @Component
