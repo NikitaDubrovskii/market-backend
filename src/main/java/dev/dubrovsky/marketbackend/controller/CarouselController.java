@@ -17,7 +17,7 @@ import java.util.Locale;
 
 @RestController
 @RequestMapping("/carousel")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4242"})
 @RequiredArgsConstructor
 public class CarouselController {
 

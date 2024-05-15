@@ -3,7 +3,7 @@ package dev.dubrovsky.marketbackend.service;
 import dev.dubrovsky.marketbackend.model.News;
 import dev.dubrovsky.marketbackend.payload.news.NewNewsPayload;
 import dev.dubrovsky.marketbackend.payload.news.UpdateNewsPayload;
-import dev.dubrovsky.marketbackend.repositorie.NewsRepository;
+import dev.dubrovsky.marketbackend.repository.NewsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
@@ -56,6 +56,10 @@ public class NewsService {
     public void delete(Long id, Locale locale) {
         var news = findNews(id, locale);
         newsRepository.delete(news);
+    }
+
+    public Integer getCount() {
+        return newsRepository.findAll().size();
     }
 
     private News findNews(Long id, Locale locale) {

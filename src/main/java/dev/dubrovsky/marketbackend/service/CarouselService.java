@@ -3,7 +3,7 @@ package dev.dubrovsky.marketbackend.service;
 import dev.dubrovsky.marketbackend.model.Carousel;
 import dev.dubrovsky.marketbackend.payload.carousel.NewCarouselPayload;
 import dev.dubrovsky.marketbackend.payload.carousel.UpdateCarouselPayload;
-import dev.dubrovsky.marketbackend.repositorie.CarouselRepository;
+import dev.dubrovsky.marketbackend.repository.CarouselRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;

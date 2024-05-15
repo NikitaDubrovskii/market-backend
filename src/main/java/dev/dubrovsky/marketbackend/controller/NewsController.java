@@ -16,7 +16,7 @@ import java.util.Locale;
 
 @RestController
 @RequestMapping("news")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4242"})
 @RequiredArgsConstructor
 public class NewsController {
 
@@ -70,6 +70,11 @@ public class NewsController {
                                        Locale locale) {
         newsService.delete(id, locale);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/admin/count")
+    public ResponseEntity<Integer> getCount() {
+        return ResponseEntity.ok().body(newsService.getCount());
     }
 
 }

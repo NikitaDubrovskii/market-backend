@@ -21,7 +21,7 @@ import java.util.Locale;
 
 @RestController
 @RequestMapping("game")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4242"})
 @RequiredArgsConstructor
 public class GameController {
 
@@ -32,6 +32,12 @@ public class GameController {
                                         Locale locale) {
         var game = gameService.getById(id, locale);
         return ResponseEntity.ok().body(game);
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<Game>> getAll() {
+        var all = gameService.getAll();
+        return ResponseEntity.ok().body(all);
     }
 
     @GetMapping("/popularGame")
@@ -134,4 +140,8 @@ public class GameController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/admin/count")
+    public ResponseEntity<Integer> getCount() {
+        return ResponseEntity.ok().body(gameService.getCount());
+    }
 }

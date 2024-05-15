@@ -16,7 +16,7 @@ import java.util.Locale;
 
 @RestController
 @RequestMapping("shop")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4242"})
 @RequiredArgsConstructor
 public class ShopController {
 
@@ -72,4 +72,8 @@ public class ShopController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/admin/count")
+    public ResponseEntity<Integer> getCount() {
+        return ResponseEntity.ok().body(shopService.getCount());
+    }
 }

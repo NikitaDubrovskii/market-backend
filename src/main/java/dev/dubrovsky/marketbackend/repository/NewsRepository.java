@@ -1,4 +1,4 @@
-package dev.dubrovsky.marketbackend.repositorie;
+package dev.dubrovsky.marketbackend.repository;
 
 import dev.dubrovsky.marketbackend.model.News;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -4,8 +4,8 @@ import dev.dubrovsky.marketbackend.model.Category;
 import dev.dubrovsky.marketbackend.model.Game;
 import dev.dubrovsky.marketbackend.payload.category.NewCategoryPayload;
 import dev.dubrovsky.marketbackend.payload.category.UpdateCategoryPayload;
-import dev.dubrovsky.marketbackend.repositorie.CategoryRepository;
-import dev.dubrovsky.marketbackend.repositorie.GameRepository;
+import dev.dubrovsky.marketbackend.repository.CategoryRepository;
+import dev.dubrovsky.marketbackend.repository.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
@@ -98,6 +98,10 @@ public class CategoryService {
         BeanUtils.copyProperties(temp, category);
 
         categoryRepository.save(category);
+    }
+
+    public Integer getCount() {
+        return categoryRepository.findAll().size();
     }
 
     private Category findCategory(Long id, Locale locale) {

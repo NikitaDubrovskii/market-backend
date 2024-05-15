@@ -3,7 +3,7 @@ package dev.dubrovsky.marketbackend.service;
 import dev.dubrovsky.marketbackend.model.Shop;
 import dev.dubrovsky.marketbackend.payload.shop.NewShopPayload;
 import dev.dubrovsky.marketbackend.payload.shop.UpdateShopPayload;
-import dev.dubrovsky.marketbackend.repositorie.ShopRepository;
+import dev.dubrovsky.marketbackend.repository.ShopRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
@@ -59,6 +59,10 @@ public class ShopService {
         shopRepository.save(shop);
 
         shopRepository.delete(shop);
+    }
+
+    public Integer getCount() {
+        return shopRepository.findAll().size();
     }
 
     private Shop findShop(Long id, Locale locale) {

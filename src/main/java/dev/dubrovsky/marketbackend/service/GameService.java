@@ -10,9 +10,9 @@ import dev.dubrovsky.marketbackend.model.Game;
 import dev.dubrovsky.marketbackend.model.Image;
 import dev.dubrovsky.marketbackend.payload.game.NewGamePayload;
 import dev.dubrovsky.marketbackend.payload.game.UpdateGamePayload;
-import dev.dubrovsky.marketbackend.repositorie.CategoryRepository;
-import dev.dubrovsky.marketbackend.repositorie.GameRepository;
-import dev.dubrovsky.marketbackend.repositorie.ImageRepository;
+import dev.dubrovsky.marketbackend.repository.CategoryRepository;
+import dev.dubrovsky.marketbackend.repository.GameRepository;
+import dev.dubrovsky.marketbackend.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
@@ -40,6 +40,10 @@ public class GameService {
 
     public Game getById(Long id, Locale locale) {
         return findGame(id, locale);
+    }
+
+    public List<Game> getAll() {
+        return gameRepository.findAll();
     }
 
     public List<GamePopularDTO> getPopularGame() {
@@ -254,6 +258,10 @@ public class GameService {
         BeanUtils.copyProperties(temp, game);
 
         gameRepository.save(game);
+    }
+
+    public Integer getCount() {
+        return gameRepository.findAll().size();
     }
 
     private Game findGame(Long id, Locale locale) {

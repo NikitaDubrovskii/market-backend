@@ -16,7 +16,7 @@ import java.util.Locale;
 
 @RestController
 @RequestMapping("category")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4242"})
 @RequiredArgsConstructor
 public class CategoryController {
 
@@ -85,6 +85,11 @@ public class CategoryController {
                                                         @RequestParam Long... idGames) {
         categoryService.removeGamesFromCategory(idCategory, locale, idGames);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/admin/count")
+    public ResponseEntity<Integer> getCount() {
+        return ResponseEntity.ok().body(categoryService.getCount());
     }
 
 }
